@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
-import { IsString, IsNumber, IsEmail, Length, IsUrl } from 'class-validator'
+import { IsString, IsEmail, Length, IsUrl } from 'class-validator'
 
 @Entity()
 export default class Ad extends BaseEntity {
@@ -23,7 +23,7 @@ export default class Ad extends BaseEntity {
   @Column('text', {nullable:false})
   pictureUrl: string
 
-  @IsNumber()
+  @IsString()
   @Column('integer', {nullable:false})
   price: number
 
@@ -32,7 +32,7 @@ export default class Ad extends BaseEntity {
   @Column('text', {nullable:false})
   email: string
 
-  @IsNumber()
+  @IsString()
   @Column('integer', {nullable:false})
   phone: number
 }
