@@ -1,6 +1,6 @@
-// src/pages/controller.ts
+// src/ads/controller.ts
 import { JsonController, Get, Param, Post, HttpCode, Body } from 'routing-controllers'
-import adsById, { Ad } from './data'
+import Ad from './entity'
 
 type AdList = { ads: Ad[] }
 
@@ -10,22 +10,21 @@ export default class AdController {
     @Get('/ads/:id')
     getAd(
         @Param('id') id: number
-    ): Ad {
-        return adsById[id]
+    ): Promise<Ad | undefined> {
+        return Ad.findOne(id)
     }
 
     @Get('/ads')
-    allAds(): AdList {
-        return {
-            ads: Object.values(adsById)
-        }
+    async allAds(): Promise<AdList> {
+        const ads = await Ad.find()
+        return { ads }
     }
 
     @Post('/ads')
     @HttpCode(201)
-    createPage(
-        @Body() body: Ad
-    ): Ad {
-        return body
+    createAd(
+        @Body() ad: Ad
+    ): Promise<Ad> {
+        return ad.save()
     }
 }
