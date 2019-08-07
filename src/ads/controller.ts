@@ -1,5 +1,5 @@
 // src/pages/controller.ts
-import { JsonController, Get, Param } from 'routing-controllers'
+import { JsonController, Get, Param, Post, HttpCode, Body } from 'routing-controllers'
 import adsById, { Ad } from './data'
 
 type AdList = { ads: Ad[] }
@@ -19,5 +19,13 @@ export default class AdController {
         return {
             ads: Object.values(adsById)
         }
+    }
+
+    @Post('/ads')
+    @HttpCode(201)
+    createPage(
+        @Body() body: Ad
+    ): Ad {
+        return body
     }
 }
