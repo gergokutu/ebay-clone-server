@@ -1,5 +1,5 @@
 const cors = require('koa-cors')
-const bodyParser = require('koa-bodyparser')
+// const bodyParser = require('koa-bodyparser')
 
 import 'reflect-metadata'
 import {createKoaServer} from 'routing-controllers'
@@ -15,7 +15,7 @@ const app = createKoaServer({
 const port = process.env.PORT || 4000
 
 app.use(cors())
-app.use(bodyParser)
+// app.use(bodyParser)
 
 setupDb()
   .then(_ =>
